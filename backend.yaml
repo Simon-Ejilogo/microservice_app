@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zenz-backend-services
+  namespace: zenpay-uat-gh-be-ns
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - http:
+      paths:
+      - path: /user-service
+        backend:
+          service:
+            name: zenz-user-service
+            port:
+              number: 8080
+        pathType: Prefix
+      - path: /transaction-service
+        backend:
+          service:
+            name: zenz-transaction-service
+            port:
+              number: 8080
+        pathType: Prefix
+      - path: /keycloak-service
+        backend:
+          service:
+            name: zenz-keycloak-service
+            port:
+              number: 8080
+        pathType: Prefix
+      - path: /mock-server
+        backend:
+          service:
+            name: zenz-mock-server
+            port:
+              number: 8080
+        pathType: Prefix
